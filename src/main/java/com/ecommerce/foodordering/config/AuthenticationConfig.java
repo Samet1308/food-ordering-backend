@@ -1,7 +1,6 @@
 package com.ecommerce.foodordering.config;
 
 
-import com.ecommerce.foodordering.entities.User;
 import com.ecommerce.foodordering.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,9 +14,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.ArrayList;
-import java.util.Optional;
-
 @Configuration
 public class AuthenticationConfig {
     private final UserRepository userRepository;
@@ -30,10 +26,9 @@ public class AuthenticationConfig {
     public UserDetailsService userDetailsService(){
         return new UserDetailsService() {
             @Override
-            public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-              Optional<User> optionalUser= userRepository.findFirstByEmail(email);
-              if(optionalUser.isEmpty()) throw new UsernameNotFoundException("Kullanıcı Bulunamadı.",null);
-              return new org.springframework.security.core.userdetails.User(optionalUser.get().getEmail(),optionalUser.get().getPassword(),new ArrayList<>());
+            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+                return userRepository.findFirstByEmail(username)
+                        .orElseThrow(() -> new UsernameNotFoundException("User not found"));
             }
         };
     }

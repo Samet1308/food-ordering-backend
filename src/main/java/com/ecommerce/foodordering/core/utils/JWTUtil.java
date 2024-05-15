@@ -31,15 +31,14 @@ public class JWTUtil {
         return claimsResolver.apply(claims);
     }
 
-    public String generateToken(String email){
-        Map<String,Object> claims = new HashMap<>();
-        return generateToken(claims,email);
+    public String generateToken(UserDetails userDetails){
+        return generateToken(new HashMap<>(),userDetails);
     }
-    public String generateToken(Map<String,Object> claims, String email){
+    public String generateToken(Map<String,Object> extraClaims, UserDetails userDetails){
         return Jwts
                 .builder()
-                .setClaims(claims)
-                .setSubject(email)
+                .setClaims(extraClaims)
+                .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
                 .signWith(getSignInKey(),SignatureAlgorithm.HS256)

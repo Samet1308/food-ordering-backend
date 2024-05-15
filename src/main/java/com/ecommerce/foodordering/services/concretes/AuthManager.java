@@ -16,21 +16,6 @@ import org.springframework.stereotype.Service;
 public class AuthManager implements AuthService {
 
     private final UserRepository userRepository;
-    
-    @PostConstruct
-    public void createAdminAccount(){
-        User adminAccount = this.userRepository.findByUserRole(UserRole.ADMIN);
-        if(adminAccount == null){
-            User newAdminAccount = new User();
-            newAdminAccount.setName("admin");
-            newAdminAccount.setEmail("admin@test.com");
-            newAdminAccount.setPassword(new BCryptPasswordEncoder().encode("admin"));
-            newAdminAccount.setUserRole(UserRole.ADMIN);
-
-            userRepository.save(newAdminAccount);
-            System.out.println("Admin oluşturuldu.");
-        }
-    }
 
     @Override
     public GetAllUserResponse createUser(CreateUserRequest createUserRequest) {
@@ -43,13 +28,25 @@ public class AuthManager implements AuthService {
         User createdUser = userRepository.save(user);
         GetAllUserResponse usersResponse = new GetAllUserResponse();
         usersResponse.setId(createdUser.getId());
-        usersResponse.setName(createdUser.getName());
-        usersResponse.setEmail(createdUser.getEmail());
-        usersResponse.setUserRole(createdUser.getUserRole());
-        usersResponse.setPassword(createdUser.getPassword());
 
 
         return usersResponse;
 
     }
+//    @PostConstruct
+//    public void createAdminAccount(){
+//        User adminAccount = this.userRepository.findByUserRole(UserRole.ADMIN);
+//        if(adminAccount == null){
+//            User newAdminAccount = new User();
+//            newAdminAccount.setName("admin");
+//            newAdminAccount.setEmail("admin@test.com");
+//            newAdminAccount.setPassword(new BCryptPasswordEncoder().encode("admin"));
+//            newAdminAccount.setUserRole(UserRole.ADMIN);
+//
+//            userRepository.save(newAdminAccount);
+//            System.out.println("Admin oluşturuldu.");
+//        }
+//    }
+
+
 }
