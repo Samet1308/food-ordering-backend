@@ -17,4 +17,10 @@ public interface CategoryService {
     ProductDTO postProduct(Long categoryId, ProductDTO productDto) throws IOException;
 
     List<ProductDTO> getAllProductsByCategory(Long categoryId);
+
+    List<ProductDTO> getAllProductsByCategoryAndByTitle(Long categoryId, String title);
+
+    void deleteProduct(Long productId);
+
+    void deleteCategory(Long categoryId);
 }

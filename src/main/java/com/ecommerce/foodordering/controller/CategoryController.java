@@ -30,13 +30,14 @@ public class CategoryController {
         if(categoryDtoList==null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(categoryDtoList);
     }
-    @GetMapping("/categories{title}")
+    @GetMapping("/categories/{title}")
     public ResponseEntity<List<CategoryDTO>> getAllCategoriesByTitle(@PathVariable String title){
         List<CategoryDTO> categoryDtoList = categoryService.getAllCategoriesByTitle(title);
         if(categoryDtoList==null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(categoryDtoList);
     }
 
+    //Product
     @PostMapping("/{categoryId}/product")
     public ResponseEntity<?> postProduct(@PathVariable Long categoryId ,@ModelAttribute ProductDTO productDto) throws IOException {
         ProductDTO createdproductDTO = categoryService.postProduct(categoryId, productDto);
@@ -50,6 +51,24 @@ public class CategoryController {
         List<ProductDTO> productDtoList = categoryService.getAllProductsByCategory(categoryId);
         if(productDtoList==null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(productDtoList);
+    }
+
+    @GetMapping("/{categoryId}/product/{title}")
+    public ResponseEntity<List<ProductDTO>> getAllProductsByCategoryAndByTitle(@PathVariable Long categoryId, @PathVariable String title){
+        List<ProductDTO> productDtoList = categoryService.getAllProductsByCategoryAndByTitle(categoryId,title);
+        if(productDtoList==null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(productDtoList);
+    }
+    @DeleteMapping("/product/{productId}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long productId){
+        categoryService.deleteProduct(productId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/category/{categoryId}")
+    public ResponseEntity<Void> deleteCategory(@PathVariable Long categoryId){
+        categoryService.deleteCategory(categoryId);
+        return ResponseEntity.noContent().build();
     }
 
 }

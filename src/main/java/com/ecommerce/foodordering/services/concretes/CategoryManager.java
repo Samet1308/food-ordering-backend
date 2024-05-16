@@ -49,6 +49,8 @@ public class CategoryManager implements CategoryService {
         return categoryRepository.findAllByNameContaining(title).stream().map(Category::getCategoryDto).collect(Collectors.toList());
     }
 
+
+
     @Override
     public ProductDTO postProduct(Long categoryId, ProductDTO productDto) throws IOException {
         Optional<Category> optionalCategory = categoryRepository.findById(categoryId);
@@ -69,5 +71,25 @@ public class CategoryManager implements CategoryService {
     @Override
     public List<ProductDTO> getAllProductsByCategory(Long categoryId) {
         return productRepository.findAllByCategoryId(categoryId).stream().map(Product::getProductDto).collect(Collectors.toList());
+    }
+    @Override
+    public List<ProductDTO> getAllProductsByCategoryAndByTitle(Long categoryId,String title) {
+        return productRepository.findAllByCategoryIdAndNameContaining(categoryId, title).stream().map(Product::getProductDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteProduct(Long productId) {
+        Optional<Product> optionalProduct = productRepository.findById(productId);
+        if(optionalProduct.isPresent()){
+            productRepository.deleteById(productId);
+        }
+    }
+
+    @Override
+    public void deleteCategory(Long categoryId) {
+        Optional<Category> optionalCategory = categoryRepository.findById(categoryId);
+        if(optionalCategory.isPresent()){
+            categoryRepository.deleteById(categoryId);
+        }
     }
 }
