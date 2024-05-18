@@ -1,4 +1,4 @@
-package com.ecommerce.foodordering.dtos.requests.product;
+package com.ecommerce.foodordering.dtos;
 
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;

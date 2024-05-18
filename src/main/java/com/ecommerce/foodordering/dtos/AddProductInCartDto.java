@@ -1,4 +1,4 @@
-package com.ecommerce.foodordering.dtos.responses.product;
+package com.ecommerce.foodordering.dtos;
 
 import lombok.Data;
 

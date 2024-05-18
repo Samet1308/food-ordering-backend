@@ -1,16 +1,22 @@
 package com.ecommerce.foodordering.entities;
 
 import com.ecommerce.foodordering.enums.OrderStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-@Data
+
 @Entity
 @Table(name = "orders")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Order {
 
     @Id
@@ -40,6 +46,7 @@ public class Order {
     private User user;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
+    @JsonIgnore
     private List<CartItems> cartItems;
 
 }

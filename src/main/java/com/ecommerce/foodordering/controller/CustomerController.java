@@ -1,7 +1,7 @@
 package com.ecommerce.foodordering.controller;
 
-import com.ecommerce.foodordering.dtos.requests.category.CategoryDTO;
-import com.ecommerce.foodordering.dtos.requests.product.ProductDTO;
+import com.ecommerce.foodordering.dtos.CategoryDTO;
+import com.ecommerce.foodordering.dtos.ProductDTO;
 import com.ecommerce.foodordering.services.abstracts.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

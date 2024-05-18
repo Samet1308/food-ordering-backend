@@ -1,4 +1,4 @@
-package com.ecommerce.foodordering.dtos.responses.user;
+package com.ecommerce.foodordering.dtos;
 
 import com.ecommerce.foodordering.enums.UserRole;
 import lombok.AllArgsConstructor;

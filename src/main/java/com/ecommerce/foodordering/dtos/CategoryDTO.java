@@ -1,4 +1,4 @@
-package com.ecommerce.foodordering.dtos.requests.category;
+package com.ecommerce.foodordering.dtos;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Lob;

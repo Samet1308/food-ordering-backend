@@ -1,7 +1,7 @@
 package com.ecommerce.foodordering.services.concretes;
 
-import com.ecommerce.foodordering.dtos.requests.category.CategoryDTO;
-import com.ecommerce.foodordering.dtos.requests.product.ProductDTO;
+import com.ecommerce.foodordering.dtos.CategoryDTO;
+import com.ecommerce.foodordering.dtos.ProductDTO;
 import com.ecommerce.foodordering.entities.Category;
 import com.ecommerce.foodordering.entities.Product;
 import com.ecommerce.foodordering.repository.CategoryRepository;

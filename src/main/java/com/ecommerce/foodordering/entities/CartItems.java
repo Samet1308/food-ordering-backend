@@ -1,5 +1,8 @@
 package com.ecommerce.foodordering.entities;
 
+import com.ecommerce.foodordering.dtos.CartItemsDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.OnDelete;
@@ -29,5 +32,19 @@ public class CartItems {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
+    @JsonIgnore
     private Order order;
+
+    public CartItemsDto getCartDto(){
+        CartItemsDto cartItemsDto = new CartItemsDto();
+        cartItemsDto.setId(id);
+        cartItemsDto.setPrice(price);
+        cartItemsDto.setProductId(product.getId());
+        cartItemsDto.setQuantity(quantity);
+        cartItemsDto.setUserId(user.getId());
+        cartItemsDto.setProductName(product.getName());
+        cartItemsDto.setReturnedImg(product.getImg());
+
+        return cartItemsDto;
+    }
 }

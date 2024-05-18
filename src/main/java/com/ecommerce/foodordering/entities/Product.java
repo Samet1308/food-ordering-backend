@@ -1,8 +1,7 @@
 package com.ecommerce.foodordering.entities;
 
 
-import com.ecommerce.foodordering.dtos.requests.category.CategoryDTO;
-import com.ecommerce.foodordering.dtos.requests.product.ProductDTO;
+import com.ecommerce.foodordering.dtos.ProductDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;

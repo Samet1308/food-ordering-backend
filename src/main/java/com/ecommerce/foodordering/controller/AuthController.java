@@ -1,10 +1,10 @@
 package com.ecommerce.foodordering.controller;
 
 import com.ecommerce.foodordering.core.utils.JWTUtil;
-import com.ecommerce.foodordering.dtos.requests.user.AuthenticationRequest;
-import com.ecommerce.foodordering.dtos.requests.user.CreateUserRequest;
-import com.ecommerce.foodordering.dtos.responses.user.AuthenticationResponse;
-import com.ecommerce.foodordering.dtos.responses.user.GetAllUserResponse;
+import com.ecommerce.foodordering.dtos.AuthenticationRequest;
+import com.ecommerce.foodordering.dtos.CreateUserRequest;
+import com.ecommerce.foodordering.dtos.AuthenticationResponse;
+import com.ecommerce.foodordering.dtos.GetAllUserResponse;
 import com.ecommerce.foodordering.entities.User;
 import com.ecommerce.foodordering.repository.UserRepository;
 import com.ecommerce.foodordering.services.abstracts.AuthService;

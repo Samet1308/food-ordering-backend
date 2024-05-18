@@ -1,7 +1,7 @@
 package com.ecommerce.foodordering.services.concretes;
 
-import com.ecommerce.foodordering.dtos.requests.user.CreateUserRequest;
-import com.ecommerce.foodordering.dtos.responses.user.GetAllUserResponse;
+import com.ecommerce.foodordering.dtos.CreateUserRequest;
+import com.ecommerce.foodordering.dtos.GetAllUserResponse;
 import com.ecommerce.foodordering.entities.Order;
 import com.ecommerce.foodordering.entities.User;
 import com.ecommerce.foodordering.enums.OrderStatus;
@@ -9,21 +9,23 @@ import com.ecommerce.foodordering.enums.UserRole;
 import com.ecommerce.foodordering.repository.OrderRepository;
 import com.ecommerce.foodordering.repository.UserRepository;
 import com.ecommerce.foodordering.services.abstracts.AuthService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
 public class AuthManager implements AuthService {
 
-    private final UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-    private final OrderRepository orderRepository;
+    @Autowired
+    private OrderRepository orderRepository;
 
     @Override
     public GetAllUserResponse createUser(CreateUserRequest createUserRequest) {
         User user = new User();
+
         user.setName(createUserRequest.getName());
         user.setEmail(createUserRequest.getEmail());
         user.setPassword(new BCryptPasswordEncoder().encode(createUserRequest.getPassword()));

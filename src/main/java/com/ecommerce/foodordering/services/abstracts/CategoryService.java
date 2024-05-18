@@ -1,8 +1,7 @@
 package com.ecommerce.foodordering.services.abstracts;
 
-import com.ecommerce.foodordering.dtos.requests.category.CategoryDTO;
-import com.ecommerce.foodordering.dtos.requests.product.ProductDTO;
-import com.ecommerce.foodordering.entities.Category;
+import com.ecommerce.foodordering.dtos.CategoryDTO;
+import com.ecommerce.foodordering.dtos.ProductDTO;
 
 import java.io.IOException;
 import java.util.List;
