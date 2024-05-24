@@ -1,8 +1,8 @@
 package com.ecommerce.foodordering.dtos;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Lob;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
 @AllArgsConstructor
