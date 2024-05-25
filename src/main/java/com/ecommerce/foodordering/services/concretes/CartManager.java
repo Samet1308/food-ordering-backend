@@ -3,6 +3,7 @@ package com.ecommerce.foodordering.services.concretes;
 import com.ecommerce.foodordering.dtos.AddProductInCartDto;
 import com.ecommerce.foodordering.dtos.CartItemsDto;
 import com.ecommerce.foodordering.dtos.OrderDto;
+import com.ecommerce.foodordering.dtos.PlaceOrderDto;
 import com.ecommerce.foodordering.entities.CartItems;
 import com.ecommerce.foodordering.entities.Order;
 import com.ecommerce.foodordering.entities.Product;
@@ -19,8 +20,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -94,6 +97,37 @@ public class CartManager implements CartService {
         if(optionalOrder.isPresent()){
             orderRepository.deleteById(orderId);
         }
+    }
+
+    public OrderDto placeOrder(PlaceOrderDto placeOrderDto){
+        Order activeOrder = orderRepository.findByUserIdAndStatus(placeOrderDto.getUserId(), OrderStatus.Pending);
+        Optional<User> optionalUser=userRepository.findById(placeOrderDto.getUserId());
+
+        if(optionalUser.isPresent()){
+            activeOrder.setOrderDescription(placeOrderDto.getOrderDescription());
+            activeOrder.setAddress(placeOrderDto.getAddress());
+            activeOrder.setDate(new Date());
+            activeOrder.setStatus(OrderStatus.Placed);
+            activeOrder.setTrackingId(UUID.randomUUID());
+
+            orderRepository.save(activeOrder);
+
+            Order order = new Order();
+            order.setAmount(0L);
+            order.setTotalAmount(0L);
+            order.setDiscount(0L);
+            order.setUser(optionalUser.get());
+            order.setStatus(OrderStatus.Pending);
+            orderRepository.save(order);
+
+            return activeOrder.getOrderDto();
+        }
+        return null;
+    }
+
+    public List<OrderDto> getMyPlacedOrders(Long userId){
+        return orderRepository.findByUserIdAndStatusIn(userId, List.of(OrderStatus.Placed,OrderStatus.Shipped,OrderStatus.Delivered))
+                .stream().map(Order::getOrderDto).collect(Collectors.toList());
     }
 
 
